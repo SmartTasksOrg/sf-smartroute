@@ -20,23 +20,18 @@ pip install smartroute
 smartroute --demo        # run against the bundled demo
 ```
 
-## Use it anywhere
+## Run it in your stack
 
-The whole family (and its **IAIso starter kits**) covers Python, Node / TypeScript, Go, Java, PHP, Rust:
-
-| You work in… | Do this |
+| Where you work | How you run it |
 |---|---|
 | **Python** | `pip install smartroute` |
-| **Node / TypeScript** | `npx smartroute-check .` |
-| **Go** | `go run github.com/SmartTasksOrg/smartroute/ports/go .` |
-| **Java** | `java -jar smartroute-check.jar .` |
-| **PHP** | `php ports/php/smartroute-check.php .` |
-| **Rust** | `cargo run -p smartroute-check .` |
-| **AI coding tools** (Cursor, Claude, Cline, Windsurf, Zed) | add the MCP server: `{ "command": "smartroute-mcp" }` |
-| **CI / pre-commit** | drop in `.pre-commit-hooks.yaml` |
+| **CI / pre-commit** | add the hook from [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml) |
 
-Starter kits for every language live in the **[IAIso repo](https://github.com/SmartTasksOrg/IAIso)** so you can
-adopt the whole standard in the stack you already use.
+## What's in this repo
+
+- **Core engine** — [`src/smartroute/`](src/smartroute/): trust() -> TrustScore. Deterministic, dependency-free.
+- **CLI** — `smartroute --demo` (and `--version`): a deterministic demo of the core.
+- **Also included** — a runnable [`demo/`](demo/), [`examples/`](examples/), the IAIso mapping [`spec/iaiso-map.json`](spec/iaiso-map.json), a browser [`site/playground.html`](site/playground.html), plus public smoke tests in `tests/`.
 
 ## How it works
 
