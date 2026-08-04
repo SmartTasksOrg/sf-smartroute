@@ -1,0 +1,21 @@
+{
+  "family": "Smart*",
+  "tool": "SmartRoute",
+  "version": "3.0.0",
+  "iaiso_section": "\u00a75 \u00b7 Orchestration",
+  "share_mode": "public",
+  "cross_promote": [
+    "SmartPangolin",
+    "SmartPrompt",
+    "SmartCheck",
+    "SmartSeal",
+    "SmartStandard",
+    "SmartSim",
+    "SmartMoat",
+    "SmartFeed"
+  ],
+  "links": {
+    "iaiso": "https://iaiso.org",
+    "cloud": "https://smarttasks.cloud"
+  }
+}

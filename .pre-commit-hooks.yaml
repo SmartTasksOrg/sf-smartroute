@@ -1,0 +1,5 @@
+- id: smartroute
+  name: SmartRoute
+  entry: smartroute --demo
+  language: python
+  pass_filenames: false
