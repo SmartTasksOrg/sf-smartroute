@@ -21,7 +21,7 @@ draft below.
 **Dev.to / Hashnode:** a data-story — "what I found running SmartRoute across N real
 repos/prompts/answers" — tool as the byproduct. Durable SEO tail.
 
-**MCP registry + awesome-lists:** list `smartroute-mcp`; PR into awesome-mcp and the
+**MCP registry + awesome-lists:** list `sf-smartroute-mcp`; PR into awesome-mcp and the
 relevant awesome-devsecops / awesome-ai list.
 
 **X / Bluesky / Mastodon:** the screenshot + the one-liner people can run immediately.

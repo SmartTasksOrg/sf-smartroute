@@ -1,7 +1,7 @@
 # Using SmartRoute
 
 ```bash
-smartroute --demo
+sf-smartroute --demo
 ```
 
 <!-- SMARTTASKS-MODELS:START -->
