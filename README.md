@@ -15,8 +15,12 @@ As AI reshapes how we work, a new gap opens: untrusted, uncoordinated agents cre
 `route` at the exact moment the gap bites, and it works the second you clone it
 (a synthetic demo ships in `demo/`).
 
+SmartRoute is not published on PyPI yet. Until this README says otherwise, a package called `smartroute` on any registry is not ours.
+
 ```bash
-pip install smartroute
+git clone https://github.com/SmartTasksOrg/smartroute
+cd smartroute
+python -m pip install .
 smartroute --demo        # run against the bundled demo
 ```
 
@@ -24,19 +28,46 @@ smartroute --demo        # run against the bundled demo
 
 | Where you work | How you run it |
 |---|---|
-| **Python** | `pip install smartroute` |
+| **Python** | from a clone: `python -m pip install .` (not on PyPI yet) |
+| **Go · Java · Node · PHP** | native ports in [`ports/`](ports/), each verified against the Python reference by [`ports/conformance/run.sh`](ports/conformance/run.sh) |
+| **Flowise · OpenAI/Anthropic tools · GitHub Actions · LangChain · LlamaIndex · MCP · pre-commit · VS Code** | ready-made wrappers in [`integrations/`](integrations/), all calling one `adapter.py` |
 | **CI / pre-commit** | add the hook from [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml) |
 
 ## What's in this repo
 
-- **Core engine** — [`src/smartroute/`](src/smartroute/): trust() -> TrustScore. Deterministic, dependency-free.
+- **Core engine** — [`src/smartroute/`](src/smartroute/): trust() -> TrustScore; gate() -> Decision. Deterministic, dependency-free.
 - **CLI** — `smartroute --demo` (and `--version`): a deterministic demo of the core.
+- **Language ports** — [`ports/`](ports/): native Go, Java, Node, PHP implementations that reproduce the Python reference, with a shared conformance harness.
+- **Framework integrations** — [`integrations/`](integrations/): Flowise, OpenAI/Anthropic function-calling, GitHub Action, LangChain, LlamaIndex, MCP server, pre-commit, VS Code extension — each a thin wrapper over one `adapter.py` bound to the core.
 - **Also included** — a runnable [`demo/`](demo/), [`examples/`](examples/), the IAIso mapping [`spec/iaiso-map.json`](spec/iaiso-map.json), a browser [`site/playground.html`](site/playground.html), plus public smoke tests in `tests/`.
 
 ## How it works
 
-Rule IDs are namespaced `ROUTE-*` so output looks kin to the rest of the family
-(SmartPangolin's `SEC-*`, etc.). Deterministic, dependency-free, fail-loud.
+SmartRoute works at **two altitudes, one trust model** — both deterministic,
+dependency-free, and fail-loud:
+
+- **Agent-level** — `trust(agent)` / `route()` score an agent by its declared
+  capabilities (`read`, `write`, `delete`, `exec`, `network`): coarse, "should this
+  agent be allowed to act at all."
+- **Per-call** — `gate(request)` scores one concrete tool-access request and returns an
+  allow/block `Decision` with a `0..1` trust score and the exact `ROUTE-*` signals that
+  moved it. Every request starts fully trusted (`1.0`); each signal subtracts its weight;
+  the call is **granted** when `score >= 0.5` (`MIN_SCORE`) **and** nothing hard-blocks.
+
+| Rule | −weight | Fires when |
+|---|---|---|
+| `ROUTE-NO-IDENTITY` | 0.40 | the request carries no agent identity |
+| `ROUTE-UNLISTED-TOOL` | 0.25 | the tool isn't on the read-only allowlist |
+| `ROUTE-DANGEROUS-ACTION` | 0.50 | the action is destructive / high blast-radius |
+| `ROUTE-WRITE-ACTION` | 0.20 | the action mutates state (and isn't already dangerous) |
+| `ROUTE-SECRET-IN-PAYLOAD` | 0.60 | a secret/credential is present in the payload — **hard block** |
+| `ROUTE-EXFIL` | 0.30 | a state-changing action has an external destination |
+| `ROUTE-RATE` | 0.20 | `call_count` exceeds the rate limit (60) |
+| `ROUTE-UNSCOPED` | 0.15 | no scope/permission was declared |
+
+Rule IDs are namespaced `ROUTE-*` so output reads kin to the rest of the family
+(SmartPangolin's `SEC-*`, SmartPrompt's `PROMPT-*`). `risk` bands the per-call score:
+`low >= 0.75`, `medium >= 0.5`, else `high`.
 
 ### The data objects (UML)
 
@@ -59,11 +90,24 @@ classDiagram
       +allowed: bool
       +reason: str
     }
+    class Signal {
+      +rule: str
+      +weight: float
+      +reason: str
+    }
+    class Decision {
+      +granted: bool
+      +score: float
+      +risk: str
+      +signals: list[Signal]
+    }
     class IAIsoControl {
       +section: str
       +name: str
     }
+    Decision "1" *-- "many" Signal : records
     RouteDecision ..> IAIsoControl : conforms to
+    Decision ..> IAIsoControl : conforms to
 ```
 
 ## Where it sits in the architecture
