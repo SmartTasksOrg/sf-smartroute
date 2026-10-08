@@ -1,4 +1,4 @@
-<!-- mcp-name: io.github.smarttasksorg/smartroute · part of the Smart* family -->
+<!-- mcp-name: io.github.smarttasksorg/sf-smartroute · part of the Smart* family -->
 <h1 align="center">🦔 SmartRoute</h1>
 <p align="center"><b>Route only what you trust. Gate agents and tools with trust scores and guardrails.</b></p>
 <p align="center">
@@ -18,10 +18,10 @@ As AI reshapes how we work, a new gap opens: untrusted, uncoordinated agents cre
 SmartRoute is not published on PyPI yet. Until this README says otherwise, a package called `smartroute` on any registry is not ours.
 
 ```bash
-git clone https://github.com/SmartTasksOrg/smartroute
-cd smartroute
+git clone https://github.com/SmartTasksOrg/sf-smartroute
+cd sf-smartroute
 python -m pip install .
-smartroute --demo        # run against the bundled demo
+sf-smartroute --demo        # run against the bundled demo
 ```
 
 ## Run it in your stack
@@ -35,8 +35,8 @@ smartroute --demo        # run against the bundled demo
 
 ## What's in this repo
 
-- **Core engine** — [`src/smartroute/`](src/smartroute/): trust() -> TrustScore; gate() -> Decision. Deterministic, dependency-free.
-- **CLI** — `smartroute --demo` (and `--version`): a deterministic demo of the core.
+- **Core engine** — [`src/sf_smartroute/`](src/sf_smartroute/): trust() -> TrustScore; gate() -> Decision. Deterministic, dependency-free.
+- **CLI** — `sf-smartroute --demo` (and `--version`): a deterministic demo of the core.
 - **Language ports** — [`ports/`](ports/): native Go, Java, Node, PHP implementations that reproduce the Python reference, with a shared conformance harness.
 - **Framework integrations** — [`integrations/`](integrations/): Flowise, OpenAI/Anthropic function-calling, GitHub Action, LangChain, LlamaIndex, MCP server, pre-commit, VS Code extension — each a thin wrapper over one `adapter.py` bound to the core.
 - **Also included** — a runnable [`demo/`](demo/), [`examples/`](examples/), the IAIso mapping [`spec/iaiso-map.json`](spec/iaiso-map.json), a browser [`site/playground.html`](site/playground.html), plus public smoke tests in `tests/`.
@@ -71,7 +71,7 @@ Rule IDs are namespaced `ROUTE-*` so output reads kin to the rest of the family
 
 ### The data objects (UML)
 
-These are real dataclasses in [`src/smartroute/models.py`](src/smartroute/models.py) — the
+These are real dataclasses in [`src/sf_smartroute/models.py`](src/sf_smartroute/models.py) — the
 diagram and the code are the same thing:
 
 ```mermaid
@@ -181,14 +181,14 @@ all aligned to the [IAIso standard](https://github.com/SmartTasksOrg/IAIso). Eac
 
 | Tool | IAIso | What it does |
 |---|---|---|
-| [SmartPangolin](https://github.com/SmartTasksOrg/smartpangolin) | §1 · Secure Sharing | Scan before you share. Stop leaking secrets into AI models, agents, and tools. |
-| [SmartPrompt](https://github.com/SmartTasksOrg/smartprompt) | §4 · Context | Lint before you send. Bad prompt in, bad work out — and it's your name on it. |
-| [SmartCheck](https://github.com/SmartTasksOrg/smartcheck) | §2 · Verification | Check before you sign off. Catch the AI when it's confidently wrong. |
-| [SmartSeal](https://github.com/SmartTasksOrg/smartseal) | §3 · Provenance | Seal what you ship. A signed receipt so anyone can verify what they received. |
-| [SmartStandard](https://github.com/SmartTasksOrg/smartstandard) | §7 · Standards | Standardize before you scale. One shared, auditable convention for AI-assisted work. |
-| [SmartSim](https://github.com/SmartTasksOrg/smartsim) | §8 · Foresight | Simulate before it hits you. See your role's task-by-task collapse sequence. |
-| [SmartMoat](https://github.com/SmartTasksOrg/smartmoat) | §6 · Workforce | Know your moat. Score the tasks AI can't easily take — and widen them. |
-| [SmartFeed](https://github.com/SmartTasksOrg/smartfeed) | §9 · Awareness | Distill the firehose. A tight brief of only what moves your work. |
+| [SmartPangolin](https://github.com/SmartTasksOrg/sf-smartpangolin) | §1 · Secure Sharing | Scan before you share. Stop leaking secrets into AI models, agents, and tools. |
+| [SmartPrompt](https://github.com/SmartTasksOrg/sf-smartprompt) | §4 · Context | Lint before you send. Bad prompt in, bad work out — and it's your name on it. |
+| [SmartCheck](https://github.com/SmartTasksOrg/sf-smartcheck) | §2 · Verification | Check before you sign off. Catch the AI when it's confidently wrong. |
+| [SmartSeal](https://github.com/SmartTasksOrg/sf-smartseal) | §3 · Provenance | Seal what you ship. A signed receipt so anyone can verify what they received. |
+| [SmartStandard](https://github.com/SmartTasksOrg/sf-smartstandard) | §7 · Standards | Standardize before you scale. One shared, auditable convention for AI-assisted work. |
+| [SmartSim](https://github.com/SmartTasksOrg/sf-smartsim) | §8 · Foresight | Simulate before it hits you. See your role's task-by-task collapse sequence. |
+| [SmartMoat](https://github.com/SmartTasksOrg/sf-smartmoat) | §6 · Workforce | Know your moat. Score the tasks AI can't easily take — and widen them. |
+| [SmartFeed](https://github.com/SmartTasksOrg/sf-smartfeed) | §9 · Awareness | Distill the firehose. A tight brief of only what moves your work. |
 
 **Backed by the standard:** SmartRoute implements **IAIso §5 · Orchestration**.
 **Open-source edition:** this repo is the simplified, single-purpose version, built for any org to integrate into its own architecture. SmartTasks' desktop app and [SmartTasks.cloud](https://smarttasks.cloud) run a more advanced, deeply-integrated implementation of the same IAIso governance — a separate product, not this code bundled.

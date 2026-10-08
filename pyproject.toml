@@ -3,23 +3,23 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "smartroute"
+name = "sf-smartroute"
 version = "3.0.0"
 description = "Route only what you trust. Gate agents and tools with trust scores and guardrails."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 authors = [{ name = "SmartTasks Lab" }]
-keywords = ["smart", "ai", "iaiso", "smartroute", "devtools"]
+keywords = ["smart", "ai", "iaiso", "sf-smartroute", "devtools"]
 dependencies = []
 
 [project.urls]
 Homepage = "https://smarttasks.cloud"
 Standard = "https://iaiso.org"
-Repository = "https://github.com/SmartTasksOrg/smartroute"
+Repository = "https://github.com/SmartTasksOrg/sf-smartroute"
 
 [project.scripts]
-smartroute = "smartroute.cli:main"
+sf-smartroute = "sf_smartroute.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
