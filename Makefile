@@ -1,5 +1,5 @@
 test:
-	python tests/test_smartroute.py
+	python -m pytest -q
 demo:
 	python -m sf_smartroute --demo
 build:

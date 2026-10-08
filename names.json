@@ -1,18 +1,24 @@
 {
   "schema": 1,
-  "repo": "SmartTasksOrg/smartroute",
+  "repo": "SmartTasksOrg/sf-smartroute",
   "checked_on": "2026-10-08",
   "names": [
     {
       "registry": "pypi",
-      "name": "smartroute",
+      "name": "sf-smartroute",
       "registered": false,
       "workflow": "release.yml",
       "note": "first release pending; README in state A"
     },
     {
+      "registry": "pypi",
+      "name": "smartroute",
+      "registered": false,
+      "note": "not used by the family: packages are published as sf-<name>; never install this name"
+    },
+    {
       "registry": "mcp",
-      "name": "io.github.smarttasksorg/smartroute",
+      "name": "io.github.smarttasksorg/sf-smartroute",
       "registered": false
     }
   ],
