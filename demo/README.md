@@ -1,2 +1,2 @@
 # SmartRoute demo
-Bundled sample data; `smartroute --demo` uses built-ins.
+Bundled sample data; `sf-smartroute --demo` uses built-ins.
