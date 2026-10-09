@@ -15,6 +15,6 @@ A tool that needs setup before it proves itself doesn't spread. Ship the demo.
 Meet the IAIso §5 · Orchestration bar, then stack with every sibling tool.
 
 **V. Bare it all — except the secrets.**
-Radical in the open (smartroute/), locked where it counts (private/).
+Radical in the open (sf-smartroute/), locked where it counts (private/).
 
 *SmartRoute is part of the Smart* family. https://iaiso.org · https://smarttasks.cloud*
