@@ -1,0 +1,4 @@
+{ "name": "@smarttasks/smartroute", "version": "3.0.0",
+  "description": "SmartRoute — native Node port. Deterministic per-call agent trust gate. Zero deps.",
+  "license": "Apache-2.0", "bin": { "smartroute": "bin/cli.js" }, "main": "lib/gate.js",
+  "scripts": { "test": "node test/conformance.test.js" } }

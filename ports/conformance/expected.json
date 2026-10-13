@@ -1,0 +1,157 @@
+{
+  "results": [
+    {
+      "name": "safe-read",
+      "granted": true,
+      "score": 1.0,
+      "risk": "low",
+      "signals": []
+    },
+    {
+      "name": "unlisted-tool",
+      "granted": true,
+      "score": 0.75,
+      "risk": "low",
+      "signals": [
+        {
+          "rule": "ROUTE-UNLISTED-TOOL",
+          "weight": 0.25,
+          "reason": "tool 'db' is not on the read-only allowlist"
+        }
+      ]
+    },
+    {
+      "name": "dangerous-delete",
+      "granted": true,
+      "score": 0.5,
+      "risk": "medium",
+      "signals": [
+        {
+          "rule": "ROUTE-DANGEROUS-ACTION",
+          "weight": 0.5,
+          "reason": "action is destructive / high blast-radius"
+        }
+      ]
+    },
+    {
+      "name": "write-boundary",
+      "granted": true,
+      "score": 0.5,
+      "risk": "medium",
+      "signals": [
+        {
+          "rule": "ROUTE-DANGEROUS-ACTION",
+          "weight": 0.5,
+          "reason": "action is destructive / high blast-radius"
+        }
+      ]
+    },
+    {
+      "name": "secret-failclosed",
+      "granted": false,
+      "score": 0.4,
+      "risk": "high",
+      "signals": [
+        {
+          "rule": "ROUTE-SECRET-IN-PAYLOAD",
+          "weight": 0.6,
+          "reason": "a secret/credential is present in the payload"
+        }
+      ]
+    },
+    {
+      "name": "exfil",
+      "granted": true,
+      "score": 0.5,
+      "risk": "medium",
+      "signals": [
+        {
+          "rule": "ROUTE-WRITE-ACTION",
+          "weight": 0.2,
+          "reason": "action mutates state"
+        },
+        {
+          "rule": "ROUTE-EXFIL",
+          "weight": 0.3,
+          "reason": "state-changing action with an external destination"
+        }
+      ]
+    },
+    {
+      "name": "rate-61",
+      "granted": true,
+      "score": 0.8,
+      "risk": "low",
+      "signals": [
+        {
+          "rule": "ROUTE-RATE",
+          "weight": 0.2,
+          "reason": "call_count 61 exceeds rate limit 60"
+        }
+      ]
+    },
+    {
+      "name": "rate-60-ok",
+      "granted": true,
+      "score": 1.0,
+      "risk": "low",
+      "signals": []
+    },
+    {
+      "name": "no-identity-unscoped",
+      "granted": false,
+      "score": 0.0,
+      "risk": "high",
+      "signals": [
+        {
+          "rule": "ROUTE-NO-IDENTITY",
+          "weight": 0.4,
+          "reason": "no agent identity on the request"
+        },
+        {
+          "rule": "ROUTE-UNLISTED-TOOL",
+          "weight": 0.25,
+          "reason": "tool 'db' is not on the read-only allowlist"
+        },
+        {
+          "rule": "ROUTE-DANGEROUS-ACTION",
+          "weight": 0.5,
+          "reason": "action is destructive / high blast-radius"
+        },
+        {
+          "rule": "ROUTE-EXFIL",
+          "weight": 0.3,
+          "reason": "state-changing action with an external destination"
+        },
+        {
+          "rule": "ROUTE-RATE",
+          "weight": 0.2,
+          "reason": "call_count 91 exceeds rate limit 60"
+        },
+        {
+          "rule": "ROUTE-UNSCOPED",
+          "weight": 0.15,
+          "reason": "no scope/permission declared"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "granted": false,
+      "score": 0.45,
+      "risk": "high",
+      "signals": [
+        {
+          "rule": "ROUTE-NO-IDENTITY",
+          "weight": 0.4,
+          "reason": "no agent identity on the request"
+        },
+        {
+          "rule": "ROUTE-UNSCOPED",
+          "weight": 0.15,
+          "reason": "no scope/permission declared"
+        }
+      ]
+    }
+  ]
+}

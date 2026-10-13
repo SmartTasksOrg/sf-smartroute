@@ -1,35 +1,41 @@
 """SmartRoute CLI — run `smartroute --demo`."""
-import os, sys, json
+import sys
 from . import core
 from ._version import __version__
 
 
-def _demo_dir():
-    return os.path.join(os.path.dirname(__file__), "..", "..", "demo")
+def core_demo() -> str:
+    out = ["agent-level routing (allowlist: read, network):"]
+    for d in core.route():
+        out.append(f"  {'ok ' if d.allowed else 'no '} {d.agent:<14} {d.reason}")
+    out.append("")
+    out.append("per-call gate:")
+    reqs = [
+        {"agent": "svc-reporting", "tool": "search", "action": "read", "scope": "reports:read"},
+        {"agent": "", "tool": "db", "action": "delete",
+         "payload": "DROP TABLE users; key=AKIAIOSFODNN7EXAMPLE", "call_count": 91},
+    ]
+    for r in reqs:
+        g = core.gate(r)
+        verb = "ALLOW" if g.granted else "BLOCK"
+        out.append(f"  {verb}  score={g.score:<5} risk={g.risk:<6} "
+                   f"tool={r.get('tool')!r} action={r.get('action')!r}")
+        for s in g.signals:
+            out.append(f"      x {s.rule} (-{s.weight}) {s.reason}")
+    return "\n".join(out)
 
 
 def main(argv=None):
     argv = argv if argv is not None else sys.argv[1:]
     if "--version" in argv:
-        print(f"SmartRoute {__version__}"); return 0
-    demo = "--demo" in argv or not argv
-    print(f"\n🦔 SmartRoute {__version__}  ·  IAIso §5 · Orchestration")
-    result = core_demo()
-    print(result)
-    print(f"\nBacked by IAIso §5 · Orchestration · part of the Smart* family · https://smarttasks.cloud\n")
+        print(f"SmartRoute {__version__}")
+        return 0
+    print(f"\nSmartRoute {__version__}  -  IAIso \u00a75 \u00b7 Orchestration")
+    print(core_demo())
+    print("\nBacked by IAIso \u00a75 \u00b7 Orchestration \u00b7 part of the Smart* family "
+          "\u00b7 https://smarttasks.cloud\n")
     return 0
 
-
-def core_demo() -> str:
-    return _DEMO()
-
-
-def _DEMO():
-    out = ["routing agents against allowlist (read, network):"]
-    for d in core.route():
-        mark = "✓" if d.allowed else "✗"
-        out.append(f"  {mark} {d.agent:<14} {d.reason}")
-    return "\n".join(out)
 
 if __name__ == "__main__":
     sys.exit(main())

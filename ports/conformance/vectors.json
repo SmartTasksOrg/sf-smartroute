@@ -1,0 +1,15 @@
+{
+  "description": "Shared SmartRoute conformance vectors. Every port must reproduce the Python reference (smartroute.core.gate) for each request.",
+  "cases": [
+    { "name": "safe-read",        "request": { "agent": "svc", "tool": "search", "action": "read", "scope": "reports:read" } },
+    { "name": "unlisted-tool",    "request": { "agent": "a", "tool": "db", "action": "read", "scope": "r" } },
+    { "name": "dangerous-delete", "request": { "agent": "a", "tool": "search", "action": "delete rows", "scope": "r" } },
+    { "name": "write-boundary",   "request": { "agent": "a", "tool": "search", "action": "delete", "scope": "r" } },
+    { "name": "secret-failclosed","request": { "agent": "a", "tool": "search", "action": "read", "scope": "r", "payload": "key=AKIAIOSFODNN7EXAMPLE" } },
+    { "name": "exfil",            "request": { "agent": "a", "tool": "search", "action": "send", "scope": "r", "payload": "to user@external.com" } },
+    { "name": "rate-61",          "request": { "agent": "a", "tool": "search", "action": "read", "scope": "r", "call_count": 61 } },
+    { "name": "rate-60-ok",       "request": { "agent": "a", "tool": "search", "action": "read", "scope": "r", "call_count": 60 } },
+    { "name": "no-identity-unscoped", "request": { "tool": "db", "action": "delete", "payload": "https://x.com", "call_count": 91 } },
+    { "name": "empty",            "request": {} }
+  ]
+}

