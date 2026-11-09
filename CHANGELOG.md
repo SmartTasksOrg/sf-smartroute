@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added
+- `route(agents, ...)` routes the agents you pass; before, it always routed the built-in sample catalog.
+- Configurable `risk`, `min_score` and `unknown_risk`; blocked reasons say which capability or threshold blocked the agent.
+- `parse_agents()` / `load_agents()` / `load_risk()` with validation.
+- CLI: `sf-smartroute AGENTS.json [--allow ...] [--min-score ...] [--risk ...] [--json]`, exit code 1 when any agent is blocked.
+
+### Tests
+- `tests/test_behaviour.py` now has 10 behaviour tests covering real input, validation and the CLI.
+
 ### Tests
 - `tests/test_behaviour.py`: 6 behaviour tests of `core` (every rule or formula, edge cases and the fallbacks), next to the 2 smoke tests of the demo.
 
