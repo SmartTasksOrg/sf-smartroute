@@ -47,9 +47,9 @@ sf-smartroute --demo
 ## Status
 
 - **Version 3.0.0, experimental (alpha).** A small deterministic command-line tool with a bundled synthetic demo. The version number does not mean the tool is mature: PyPI classifies it as "Development Status :: 3 - Alpha".
-- **Scope:** `trust()` and `route()` score an agent's declared capabilities against an allowlist; the sample catalog is built in. The per-call `gate()` described under "How it works" is not in this release.
+- **Scope:** `trust()` and `route()` score the agents you pass (or a JSON file via `load_agents()`) by their declared capabilities against an allowlist, with your own risk weights and minimum score; with no agents, `route()` uses the demo's sample catalog. Run it on your own file: `sf-smartroute agents.json --allow read,network`. The per-call `gate()` described under "How it works" is not in this release.
 - **Published:** PyPI `sf-smartroute` (see Install). Nothing else is published.
-- **Tested:** the 8 tests in `tests/` (2 smoke tests of the demo and 6 behaviour tests of `core`, in `tests/test_behaviour.py`) on Python 3.12, Linux, on every push to master and every pull request (`.github/workflows/ci.yml`).
+- **Tested:** the 12 tests in `tests/` (2 smoke tests of the demo and 10 behaviour tests of `core`, in `tests/test_behaviour.py`) on Python 3.12, Linux, on every push to master and every pull request (`.github/workflows/ci.yml`).
 - **Not tested:** Windows and macOS; Python versions other than 3.12.
 - **Security review:** none independent. Report vulnerabilities as described in [SECURITY.md](SECURITY.md).
 
