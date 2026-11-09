@@ -1,6 +1,6 @@
 # Security policy
 
-SmartRoute 3.0.0 is experimental software. It has had no independent
+SmartRoute 3.1.0 is experimental software. It has had no independent
 security review. [README "Status"](README.md#status) says what is tested and
 what is not.
 
